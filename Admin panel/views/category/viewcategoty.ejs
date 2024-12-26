@@ -1,0 +1,87 @@
+<%- include('../header') %>
+
+<section class="tab-components">
+  <div class="container-fluid">
+    <!-- ========== title-wrapper start ========== -->
+    <div class="title-wrapper pt-30">
+      <div class="row align-items-center">
+        <div class="col-md-6">
+          <div class="title">
+            <h2> View Category</h2>
+          </div>
+        </div>
+        <!-- end col -->
+        <div class="col-md-6">
+          <div class="breadcrumb-wrapper">
+            <nav aria-label="breadcrumb">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                  <a href="#0">Dashboard</a>
+                </li>
+                <li class="breadcrumb-item"><a href="#0">Forms</a></li>
+                <li class="breadcrumb-item active" aria-current="page">
+                  Form Elements
+                </li>
+              </ol>
+            </nav>
+          </div>
+        </div>
+        <!-- end col -->
+      </div>
+      <!-- end row -->
+    </div>
+    <!-- ========== title-wrapper end ========== -->
+
+    <!-- ========== form-elements-wrapper start ========== -->
+    <form method="post" action="/category/addCategory" class="form-elements-wrapper">
+      <div class="row">
+        <div class="col-12">
+      
+          <table class="table">
+            <thead>
+            
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col"> Category
+                </th>
+                
+                <th scope="col">action</th>
+                <th scope="col">Status</th>
+              </tr>
+            </thead>
+            <tbody>    <% users.map((val, i)=>{%>
+
+                    <tr>
+                        <td><%= ++i %></td>
+                        <td><%= val.category %></td>
+                        <td>
+                          <a href="/category/categorydelete?id=<%=val.id%>">delete</a> ||
+                          <a href="/category/categoryedit?id=<%=val.id%>">Edit</a>
+                        </td>
+
+                        <td>
+                          <% if(val.status == "active"){%>
+                            <a href="/category/changeStatus?id=<%= val.id%>&status=<%= val.status %>" class=" btn btn-success"> active  </a>
+                            <% }else{%>
+                              <a href="/category/changeStatus?id=<%= val.id%>&status=<%= val.status %>" class=" btn btn-warning"> deactive  </a>
+
+                          <% }%>
+                      
+                        </td>
+                    </tr>
+                <%   }) %>
+              
+              
+            </tbody>
+          </table>
+          <!-- ======= input switch style end ======= -->
+        </div>
+        <!-- end col -->
+      </div>
+      <!-- end row -->
+    </form>
+    <!-- ========== form-elements-wrapper end ========== -->
+  </div>
+  <!-- end container -->
+</section>
+<%- include('../foter') %>

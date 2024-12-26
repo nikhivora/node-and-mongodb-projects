@@ -1,0 +1,87 @@
+<%- include('../header') %>
+<section class="tab-components">
+  <div class="container-fluid">
+    <!-- ========== title-wrapper start ========== -->
+    <div class="title-wrapper pt-30">
+      <div class="row align-items-center">
+        <div class="col-md-6">
+          <div class="title">
+            <h2> Sub View Category</h2>
+          </div>
+        </div>
+        <!-- end col -->
+        <div class="col-md-6">
+          <div class="breadcrumb-wrapper">
+            <nav aria-label="breadcrumb">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                  <a href="#0">Dashboard</a>
+                </li>
+                <li class="breadcrumb-item"><a href="#0">Forms</a></li>
+                <li class="breadcrumb-item active" aria-current="page">
+                  Form Elements
+                </li>
+              </ol>
+            </nav>
+          </div>
+        </div>
+        <!-- end col -->
+      </div>
+      <!-- end row -->
+    </div>
+    <!-- ========== title-wrapper end ========== -->
+
+    <!-- ========== form-elements-wrapper start ========== -->
+    <form method="post" action="/category/addCategory" class="form-elements-wrapper">
+      <div class="row">
+        <div class="col-12">
+      
+          <table class="table">
+            <thead>
+            
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col"> Category </th>
+                <th scope="col">Sub Category </th>
+                <th scope="col">Ex Sub Category </th>
+                <th scope="col">action</th>
+                <th scope="col">Status</th>
+              </tr>
+            </thead>
+            <tbody>   
+              <% exsucategory.map((exsubcat,i)=>{%>
+                <tr>
+                  <td> <%= ++i%> </td>
+                <td><%=exsubcat?.categoryid?.category%></td>
+                <td><%=exsubcat?.subcategoryid?.subcategory%></td>
+                <td><%=exsubcat?.exsubcategory%></td>
+                <td>
+                  <a class="btn btn-primary" href="/exsubcategory/exsubcategoryedit?id=<%=exsubcat.id%>">edit</a>
+                  <a class="btn btn-danger" href="/exsubcategory/exsubcategorydelete?id=<%=exsubcat.id%>">delete</a>
+                </td>
+                <td>
+                  <% if(exsubcat.status=="active"){%>
+                    <a href="/exsubcategory/changstatus?id=<%=exsubcat.id%>&status=<%= exsubcat.status%>" class="btn btn-success">Active</a>
+
+                 <% }else{ %>
+                  <a href="/exsubcategory/changstatus?id=<%=exsubcat.id%>&status=<%= exsubcat.status%>" class="btn btn-warning">Deactive</a>
+                <% }%>
+                </td>
+
+           <%   })%>
+              
+              
+            </tbody>
+          </table>
+          <!-- ======= input switch style end ======= -->
+        </div>
+        <!-- end col -->
+      </div>
+      <!-- end row -->
+    </form>
+    <!-- ========== form-elements-wrapper end ========== -->
+  </div>
+  <!-- end container -->
+</section>
+
+<%- include('../foter') %>

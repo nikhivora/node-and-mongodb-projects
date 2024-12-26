@@ -1,0 +1,140 @@
+<%- include('../header') %>
+<section class="tab-components">
+  <div class="container-fluid">
+    <!-- ========== title-wrapper start ========== -->
+    <div class="title-wrapper pt-30">
+      <div class="row align-items-center">
+        <div class="col-md-6">
+          <div class="title">
+            <h2>Add Sub Categoty </h2>
+          </div>
+        </div>
+        <!-- end col -->
+        <div class="col-md-6">
+          <div class="breadcrumb-wrapper">
+            <nav aria-label="breadcrumb">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                  <a href="#0">Dashboard</a>
+                </li>
+                <li class="breadcrumb-item"><a href="#0">Add Sub Categoty</a></li>
+                <li class="breadcrumb-item active" aria-current="page">
+                    Add Sub Categoty
+                </li>
+              </ol>
+            </nav>
+          </div>
+        </div>
+        <!-- end col -->
+      </div>
+      <!-- end row -->
+    </div>
+    <!-- ========== title-wrapper end ========== -->
+
+    <!-- ========== form-elements-wrapper start ========== -->
+    <form method="post" action="/product/insertrecord" enctype="multipart/form-data" class="form-elements-wrapper">
+      <div class="row">
+        <div class="col-lg-6">
+          <!-- input style start -->
+          <div class="card-style mb-30">
+            <h6 class="mb-25">Category </h6>
+            <div class="input-style-1">
+<select name="category"  onchange="selectrecord()" id="category" class="form-select">
+  <option value="">-----select-option--</option>
+  <% category.map((cat)=>{ %>
+    <option value="<%= cat._id %>">
+        <%= cat.category %>
+    </option>
+    <% }) %>
+</select>
+<br>
+              <label>SubcategoryName</label>
+              <select name="subcategory" onchange="subcatrecord()" id="subcat" class="form-select">
+                <option value="">-----select-option--</option>
+            
+              </select><br>
+              <label>ExtraSubcategoryName</label>
+               <select name="exsubcategory" class="form-select" id="exsubcat">
+                <option value="">-----select-option--</option>
+            
+              </select><br>
+              <label>product</label>
+              <input type="text" class="form-control" name="product" placeholder="product">
+            <br>
+              <label>Price</label>
+              <input type="number" class="form-control" name="price" placeholder="price">
+            <br>
+              <label>Description </label>
+              <input type="text" class="form-control" name="desc" placeholder="Description ">
+            <br>
+              <label>Image </label>
+              <input type="file" class="form-control" name="image" placeholder="image ">
+            </div>
+            <button type="submit" class="btn btn-primary">
+              Add Producat
+            </button>
+          </div>
+          <!-- ======= input switch style end ======= -->
+        </div>
+        <!-- end col -->
+      </div>
+      <!-- end row -->
+    </form>
+    <!-- ========== form-elements-wrapper end ========== -->
+  </div>
+  <!-- end container -->
+</section>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+<script >
+  const selectrecord = () =>{
+    let category=document.getElementById('category').value
+    
+  $.ajax ({
+    type:"GET",
+    url:`/exsubcategory/ajaxcategory?id=${category}`, 
+    success:function(res){
+      const category=res.category
+      console.log();
+      
+      let tbl=""
+ tbl+=`<option value="">-----select-option--</option>`
+      category.map((cat)=>{
+             tbl+=`
+              <option value=${cat._id} > ${cat.subcategory}</option>
+
+             `
+      })
+      document.getElementById("subcat").innerHTML=tbl
+      
+    }
+    })
+  }
+
+  const subcatrecord=()=>{
+    let subcategory=document.getElementById('subcat').value
+   
+  $.ajax ({
+    type:"GET",
+    url:`/product/ajaxcategory?id=${subcategory}`, 
+    success:function(res){
+      const subcategory=res.subcategory
+      console.log(subcategory);
+      
+      let tbl=""
+ tbl+=`<option value="">-----select-option--</option>`
+ subcategory.map((cat)=>{
+             tbl+=`
+              <option value=${cat._id} > ${cat.exsubcategory}</option>
+
+             `
+      })
+      document.getElementById("exsubcat").innerHTML=tbl
+      
+    }
+    
+    })
+  }
+  
+</script>
+<%- include('../foter') %>
