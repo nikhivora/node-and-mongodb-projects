@@ -1,5 +1,5 @@
-const post=require('../models/postmodels')
-const addpost=async(req, res)=>{
+const blog=require('../models/blogmodels')
+const addblog=async(req, res)=>{
 try {
 
     const {title,desc}=req.body
@@ -11,7 +11,7 @@ try {
         })
     }
     
-const users= await post.create({
+const users= await blog.create({
     userid:req.user._id,
     title:title,
     desc:desc,
@@ -33,9 +33,9 @@ return res.status(200).send({
 }
 }
 
-const viewpost=async(req, res)=>{
+const viewblog=async(req, res)=>{
     try {
-    const users=await post.find({userid:req.user._id}).populate('userid')
+    const users=await blog.find({userid:req.user._id}).populate('userid')
     return res.status(200).send({
         success : true,
         messsge:"user  sucessfully fethch",
@@ -51,5 +51,6 @@ const viewpost=async(req, res)=>{
 }
 
 module.exports={
-    addpost,viewpost
+    addblog,viewblog,
+    
 }

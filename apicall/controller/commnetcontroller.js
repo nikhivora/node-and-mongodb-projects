@@ -1,11 +1,11 @@
 const commnetmodels=require('../models/commentmodels')
-const postmodels=require('../models/postmodels')
+const postmodels=require('../models/blogmodels')
 const addCommnet=async(req, res)=>{
 try {
- const postid=req.query.id;
+ const postid=req.body.postid;
  const post=await postmodels.findOne({_id:postid})
  if (post) {
-const {commnet}=req.body
+const commnet=req.body.commnet
  const com=await commnetmodels.create({
     userid:req.user._id,
     postid:postid,

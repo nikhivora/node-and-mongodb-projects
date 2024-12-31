@@ -4,7 +4,7 @@ const { verifyToken, admin } = require('../Midalware/Auth')
 
 const routes=express.Router()
 
-routes.post('/addusers',adddata) 
+routes.post('/registeruser',adddata) 
 routes.get('/viewusers',verifyToken,admin,viewuser) 
 routes.delete('/deleteusers',deleteusers) 
 routes.put('/updateusers',updateusers) 

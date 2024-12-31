@@ -3,10 +3,10 @@ const usermodels=require('../models/usermodels')
 const adddata=async(req, res)=>{
 try {
 
-    const {name,password,email,city}=req.body
+    const {name,password,email,city,phone}=req.body
 
     
-if (!name||!password||!email||!city) {
+if (!name||!password||!email||!city || !phone) {
     return res.status(500).send({
         sucess:false,
         message : "All filed is required",
@@ -25,7 +25,8 @@ if (dup) {
         name:name,
         password:password,
         email:email,
-        city:city
+        city:city,
+        phone:phone,
     })
 
 return res.status(200).send({
@@ -84,14 +85,15 @@ const deleteusers=async (req, res)=>{
 
 const updateusers=async (req, res)=>{
 try {
-    const {id,name,password,email,city}=req.body
+    const {id,name,password,email,city,phone}=req.body
     console.log(req.body);
     
     const users=await usermodels.findByIdAndUpdate(id,{
         name:name,
         password:password,
         email:email,
-        city:city
+        city:city,
+        phone:phone,
     })
     return res.status(200).send({
         sucess:true,
