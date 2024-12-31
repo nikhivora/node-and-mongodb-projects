@@ -1,5 +1,5 @@
 const express=require("express")
-const {  addblog, viewblog } = require("../controller/postcontroller")
+const {  addblog, viewblog, deleteblog, updateblog } = require("../controller/postcontroller")
 const { verifyToken } = require("../Midalware/Auth")
 
 const routes=express.Router()
@@ -20,5 +20,7 @@ const storage = multer.diskStorage({
 
 routes.post('/addblog',verifyToken,upload,addblog)
 routes.get('/viewblog',verifyToken,viewblog)
+routes.delete('/deleteblog',verifyToken,deleteblog)
+routes.put('/updateblog',verifyToken,upload,updateblog)
 
 module.exports= routes
